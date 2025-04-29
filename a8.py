@@ -4,8 +4,9 @@ print("<<<<<<<<<<<<<< XOR >>>>>>>>>>>>>>\n")
 
 
 
-
 print("\n\nTraining XOR\n\n")
+# below is training data for democrat [0] or republican [1].
+# Variables are budget, defense, crime, environment, social security
 xor_training_data =  [
     ([.9,.8,.6,.3,.1],[1]),
     ([.8,.8,.4,.6,.4],[1]),
@@ -21,11 +22,17 @@ test_data = [
     ([.8,.3,.3,.8,.3]),
     ([.9,.8,.8,.3,.6])
 ]
- 
-nn = NeuralNet(5, 5, 1)
-nn.train(xor_training_data)
+
+# original: nn = NeuralNet(5, 5, 1)
+# first trial was: nn = NeuralNet(5, 2, 1)
+# second trial was: nn = NeuralNet(5, 3, 1)
+# third trial was: nn = NeuralNet(5, 4, 1)
+# fourth trial was: nn = NeuralNet(5, 5, 1)
+nn = NeuralNet(5, 1, 1)
+# nn.train(xor_training_data,iters=6000,print_interval=20)
+nn.train(xor_training_data,iters=6000)
+
 print(nn.test_with_expected(xor_training_data))
- 
  
 for input_data in test_data:
     prediction = nn.evaluate(input_data)  # Get the network's prediction for each test input
@@ -37,18 +44,9 @@ print('the following is ih weights'
 print(nn.get_ih_weights())
 print('the following is ho weights')
 print(nn.get_ho_weights())
- 
- 
- 
- 
-# xor_testing_data = [
-#     ((0.0, 0.0)),
-     
-# ]
-# nn = NeuralNet(2,2,1)
-# nn.train(xor_training_data)
- 
-# print(nn.test(xor_testing_data))
+
+
+#----------------------------------------------------------------------------
  
 # test_training_data =  [
 #     ([.9,.8,.6,.3,.1],[1]),
